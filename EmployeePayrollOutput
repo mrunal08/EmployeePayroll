@@ -1,9 +1,6 @@
-
-
 //**UC1**//
 
 mysql>  create database payroll_service;
-Query OK, 1 row affected (1.63 sec)
 
 mysql> show databases;
 +--------------------+
@@ -17,7 +14,6 @@ mysql> show databases;
 | sys                |
 | world              |
 +--------------------+
-7 rows in set (9.97 sec)
 
 mysql> use payroll_service;
 Database changed
@@ -25,7 +21,6 @@ Database changed
 //**UC2**//
 
 mysql> CREATE TABLE employee_payroll(ID int not null auto_increment,Name varchar(50) not null,Salary double not null,StartDate Date not null,primary key(ID));
-Query OK, 0 rows affected (9.72 sec)
 
 mysql> desc employee_payroll;
 +-----------+-------------+------+-----+---------+----------------+
@@ -36,12 +31,10 @@ mysql> desc employee_payroll;
 | Salary    | double      | NO   |     | NULL    |                |
 | StartDate | date        | NO   |     | NULL    |                |
 +-----------+-------------+------+-----+---------+----------------+
-4 rows in set (1.04 sec)
 
 //-----------------UC3------------------------//
 
 insert into employee_payroll(Name,Salary,StartDate) values("Mrunal",15263,'2020-11-20');
-Query OK, 1 row affected (0.28 sec)
 
 mysql> desc employee_payroll;
 +-----------+-------------+------+-----+---------+----------------+
@@ -52,16 +45,12 @@ mysql> desc employee_payroll;
 | Salary    | double      | NO   |     | NULL    |                |
 | StartDate | date        | NO   |     | NULL    |                |
 +-----------+-------------+------+-----+---------+----------------+
-4 rows in set (0.14 sec)
 
 mysql> insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2020-1-2');
-Query OK, 1 row affected (0.19 sec)
 
 mysql> insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2010-01-21');
-Query OK, 1 row affected (0.12 sec)
 
 mysql> insert into employee_payroll(Name,Salary,StartDate) values("Tanishqa",102011.03,'2015-12-11');
-Query OK, 1 row affected (0.13 sec)
 
 //-----------------UC4--------------------//
 
@@ -74,21 +63,16 @@ mysql> select * from employee_payroll;
 |  3 | Ovee     |  11111.03 | 2010-01-21 |
 |  4 | Tanishqa | 102011.03 | 2015-12-11 |
 +----+----------+-----------+------------+
-4 rows in set (0.03 sec)
 
-mysql>
 
 //------------------UC5-----------------//
 
- SELECT Salary FROM employee_payroll where Name = "Mrunal";
+mysql>SELECT Salary FROM employee_payroll where Name = "Mrunal";
 +--------+
 | Salary |
 +--------+
 |  15263 |
 +--------+
-1 row in set (0.02 sec)
-
-
 
 mysql> SELECT * from employee_payroll where StartDate between cast('2015-12-11' as Date) and Date(NOW());
 +----+----------+-----------+------------+
@@ -98,7 +82,7 @@ mysql> SELECT * from employee_payroll where StartDate between cast('2015-12-11' 
 |  2 | Ovee     |  11111.03 | 2020-01-02 |
 |  4 | Tanishqa | 102011.03 | 2015-12-11 |
 +----+----------+-----------+------------+
-3 rows in set (0.06 sec)
+
 
 //-------------------UC6-------------------//
 mysql> alter table employee_payroll add Gender varchar(10);
