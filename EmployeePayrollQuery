@@ -2,7 +2,7 @@
 
 create database payroll_service;
 
- show databases;
+show databases;
 
 use payroll_service;
 
@@ -28,7 +28,7 @@ select * from employee_payroll;
 
 //UC5
 
- SELECT Salary FROM employee_payroll where Name = "Mrunal";
+SELECT Salary FROM employee_payroll where Name = "Mrunal";
 
 SELECT * from employee_payroll where StartDate between cast('2015-12-11' as Date) and Date(NOW());
 
@@ -36,17 +36,17 @@ SELECT * from employee_payroll where StartDate between cast('2015-12-11' as Date
 
 alter table employee_payroll add Gender varchar(10);
 
- update employee_payroll set Gender = 'F' where Name = 'Mrunal';
+update employee_payroll set Gender = 'F' where Name = 'Mrunal';
 
 update employee_payroll set Gender = 'F' where Name = 'Ovee';
 
- update employee_payroll set Gender = 'F' where Name = 'Tanishqa';
+update employee_payroll set Gender = 'F' where Name = 'Tanishqa';
 
- insert into employee_payroll(Name,Salary,StartDate) values("Tushar",500000,'2020-05-04');
+insert into employee_payroll(Name,Salary,StartDate) values("Tushar",500000,'2020-05-04');
 
 update employee_payroll set Gender = 'M' where Name = 'Tushar';
 
- select * from employee_payroll;
+select * from employee_payroll;
 
 //UC7
 
@@ -68,7 +68,7 @@ alter table employee_payroll add (PhoneNumber int(10),Address varchar(255),Depar
 
 select * from employee_payroll;
 
- alter table employee_payroll add PhoneNumber double NOT NULL;
+alter table employee_payroll add PhoneNumber double NOT NULL;
 
 update employee_payroll set PhoneNumber=8862010179 where Name="Mrunal";
 
