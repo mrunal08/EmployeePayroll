@@ -1,0 +1,81 @@
+//UC1
+
+create database payroll_service;
+
+ show databases;
+
+use payroll_service;
+
+//UC2
+
+CREATE TABLE employee_payroll(ID int not null auto_increment,Name varchar(50) not null,Salary double not null,StartDate Date not null,primary key(ID));
+
+desc employee_payroll;
+
+//uc3
+
+insert into employee_payroll(Name,Salary,StartDate) values("Mrunal",15263,'2020-11-20');
+
+insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2020-1-2');
+
+insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2010-01-21');
+
+insert into employee_payroll(Name,Salary,StartDate) values("Tanishqa",102011.03,'2015-12-11');
+
+///UC4
+
+select * from employee_payroll;
+
+//UC5
+
+ SELECT Salary FROM employee_payroll where Name = "Mrunal";
+
+SELECT * from employee_payroll where StartDate between cast('2015-12-11' as Date) and Date(NOW());
+
+//UC6
+
+alter table employee_payroll add Gender varchar(10);
+
+ update employee_payroll set Gender = 'F' where Name = 'Mrunal';
+
+update employee_payroll set Gender = 'F' where Name = 'Ovee';
+
+ update employee_payroll set Gender = 'F' where Name = 'Tanishqa';
+
+ insert into employee_payroll(Name,Salary,StartDate) values("Tushar",500000,'2020-05-04');
+
+update employee_payroll set Gender = 'M' where Name = 'Tushar';
+
+ select * from employee_payroll;
+
+//UC7
+
+select sum(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
+
+select avg(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
+
+select min(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
+
+select max(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
+
+select count(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
+
+select count(Salary) from employee_payroll where Gender = 'M' GROUP BY Gender;
+
+//UC8
+
+alter table employee_payroll add (PhoneNumber int(10),Address varchar(255),Department varchar(255));
+
+select * from employee_payroll;
+
+ alter table employee_payroll add PhoneNumber double NOT NULL;
+
+update employee_payroll set PhoneNumber=8862010179 where Name="Mrunal";
+
+update employee_payroll set Address="Australia",Department="Admin",PhoneNumber=9921269009 where Name="Ovee";
+
+update employee_payroll set Address="Hadapsar",Department="Admin",PhoneNumber=8686868666 where Name="Tanishqa";
+
+update employee_payroll set Address="Bhosari",Department="Tech",PhoneNumber=9158331585 where Name="Tushar";
+
+select * from employee_payroll;

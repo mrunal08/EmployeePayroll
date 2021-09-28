@@ -1,0 +1,293 @@
+
+
+//**UC1**//
+
+mysql>  create database payroll_service;
+Query OK, 1 row affected (1.63 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (9.97 sec)
+
+mysql> use payroll_service;
+Database changed
+
+//**UC2**//
+
+mysql> CREATE TABLE employee_payroll(ID int not null auto_increment,Name varchar(50) not null,Salary double not null,StartDate Date not null,primary key(ID));
+Query OK, 0 rows affected (9.72 sec)
+
+mysql> desc employee_payroll;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| Name      | varchar(50) | NO   |     | NULL    |                |
+| Salary    | double      | NO   |     | NULL    |                |
+| StartDate | date        | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (1.04 sec)
+
+//-----------------UC3------------------------//
+
+insert into employee_payroll(Name,Salary,StartDate) values("Mrunal",15263,'2020-11-20');
+Query OK, 1 row affected (0.28 sec)
+
+mysql> desc employee_payroll;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| Name      | varchar(50) | NO   |     | NULL    |                |
+| Salary    | double      | NO   |     | NULL    |                |
+| StartDate | date        | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.14 sec)
+
+mysql> insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2020-1-2');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into employee_payroll(Name,Salary,StartDate) values("Ovee",11111.03,'2010-01-21');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employee_payroll(Name,Salary,StartDate) values("Tanishqa",102011.03,'2015-12-11');
+Query OK, 1 row affected (0.13 sec)
+
+//-----------------UC4--------------------//
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+
+| ID | Name     | Salary    | StartDate  |
++----+----------+-----------+------------+
+|  1 | Mrunal   |     15263 | 2020-11-20 |
+|  2 | Ovee     |  11111.03 | 2020-01-02 |
+|  3 | Ovee     |  11111.03 | 2010-01-21 |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 |
++----+----------+-----------+------------+
+4 rows in set (0.03 sec)
+
+mysql>
+
+//------------------UC5-----------------//
+
+ SELECT Salary FROM employee_payroll where Name = "Mrunal";
++--------+
+| Salary |
++--------+
+|  15263 |
++--------+
+1 row in set (0.02 sec)
+
+
+
+mysql> SELECT * from employee_payroll where StartDate between cast('2015-12-11' as Date) and Date(NOW());
++----+----------+-----------+------------+
+| ID | Name     | Salary    | StartDate  |
++----+----------+-----------+------------+
+|  1 | Mrunal   |     15263 | 2020-11-20 |
+|  2 | Ovee     |  11111.03 | 2020-01-02 |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 |
++----+----------+-----------+------------+
+3 rows in set (0.06 sec)
+
+//-------------------UC6-------------------//
+mysql> alter table employee_payroll add Gender varchar(10);
+Query OK, 0 rows affected (8.36 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| Name      | varchar(50) | NO   |     | NULL    |                |
+| Salary    | double      | NO   |     | NULL    |                |
+| StartDate | date        | NO   |     | NULL    |                |
+| Gender    | varchar(10) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.07 sec)
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+
+| ID | Name     | Salary    | StartDate  | Gender |
++----+----------+-----------+------------+--------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | NULL   |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | NULL   |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | NULL   |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | NULL   |
++----+----------+-----------+------------+--------+
+4 rows in set (0.05 sec)
+
+mysql> update employee_payroll set Gender = 'F' where Name = 'Mrunal';
+Query OK, 1 row affected (0.30 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+
+| ID | Name     | Salary    | StartDate  | Gender |
++----+----------+-----------+------------+--------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | NULL   |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | NULL   |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | NULL   |
++----+----------+-----------+------------+--------+
+4 rows in set (0.03 sec)
+
+mysql> update employee_payroll set Gender = 'F' where Name = 'Ovee';
+Query OK, 2 rows affected (0.31 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update employee_payroll set Gender = 'F' where Name = 'Tanishqa';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+
+| ID | Name     | Salary    | StartDate  | Gender |
++----+----------+-----------+------------+--------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | F      |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | F      |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | F      |
++----+----------+-----------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee_payroll(Name,Salary,StartDate) values("Tushar",500000,'2020-05-04');
+Query OK, 1 row affected (0.54 sec)
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+
+| ID | Name     | Salary    | StartDate  | Gender |
++----+----------+-----------+------------+--------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | F      |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | F      |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | F      |
+|  5 | Tushar   |    500000 | 2020-05-04 | NULL   |
++----+----------+-----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update employee_payroll set Gender = 'M' where Name = 'Tushar';
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+
+| ID | Name     | Salary    | StartDate  | Gender |
++----+----------+-----------+------------+--------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | F      |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | F      |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | F      |
+|  5 | Tushar   |    500000 | 2020-05-04 | M      |
++----+----------+-----------+------------+--------+
+5 rows in set (0.06 sec)
+
+//----------------------UC7-------------------//
+
+mysql> select sum(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
++-------------+
+| sum(Salary) |
++-------------+
+|   139496.09 |
++-------------+
+1 row in set (0.05 sec)
+
+mysql> select avg(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
++-------------+
+| avg(Salary) |
++-------------+
+|  34874.0225 |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select min(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
++-------------+
+| min(Salary) |
++-------------+
+|    11111.03 |
++-------------+
+1 row in set (0.04 sec)
+
+mysql> select max(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
++-------------+
+| max(Salary) |
++-------------+
+|   102011.03 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(Salary) from employee_payroll where Gender = 'F' GROUP BY Gender;
++---------------+
+| count(Salary) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.03 sec)
+
+mysql> select count(Salary) from employee_payroll where Gender = 'M' GROUP BY Gender;
++---------------+
+| count(Salary) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+
+//---------------UC8------------------------//
+
+ alter table employee_payroll add (PhoneNumber int(10),Address varchar(255),Department varchar(255));
+Query OK, 0 rows affected, 1 warning (3.86 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+-------------+---------+------------+
+| ID | Name     | Salary    | StartDate  | Gender | PhoneNumber | Address | Department |
++----+----------+-----------+------------+--------+-------------+---------+------------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      |        NULL | NULL    | NULL       |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | F      |        NULL | NULL    | NULL       |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | F      |        NULL | NULL    | NULL       |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | F      |        NULL | NULL    | NULL       |
+|  5 | Tushar   |    500000 | 2020-05-04 | M      |        NULL | NULL    | NULL       |
++----+----------+-----------+------------
+
+mysql> alter table employee_payroll add PhoneNumber double NOT NULL;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee_payroll set PhoneNumber=8862010179 where Name="Mrunal";
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set Address="Australia",Department="Admin",PhoneNumber=9921269009 where Name="Ovee";
+Query OK, 2 rows affected (0.15 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update employee_payroll set Address="Hadapsar",Department="Admin",PhoneNumber=8686868666 where Name="Tanishqa";
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set Address="Bhosari",Department="Tech",PhoneNumber=9158331585 where Name="Tushar";
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+----------+-----------+------------+--------+-----------+------------+-------------+
+| ID | Name     | Salary    | StartDate  | Gender | Address   | Department | PhoneNumber |
++----+----------+-----------+------------+--------+-----------+------------+-------------+
+|  1 | Mrunal   |     15263 | 2020-11-20 | F      | Pune      | HR         |  8862010179 |
+|  2 | Ovee     |  11111.03 | 2020-01-02 | F      | Australia | Admin      |  9921269009 |
+|  3 | Ovee     |  11111.03 | 2010-01-21 | F      | Australia | Admin      |  9921269009 |
+|  4 | Tanishqa | 102011.03 | 2015-12-11 | F      | Hadapsar  | Admin      |  8686868666 |
+|  5 | Tushar   |    500000 | 2020-05-04 | M      | Bhosari   | Tech       |  9158331585 |
++----+----------+-----------+------------+--------+-----------+------------+-------------+
+5 rows in set (0.00 sec)
